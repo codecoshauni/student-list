@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Roboto Mono Regular';
+    src: url('../fonts/RobotoMono-Regular.eot');
+    src: url('../fonts/RobotoMono-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/RobotoMono-Regular.woff') format('woff'),
+    url('../fonts/RobotoMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto Mono Bold';
+    src: url('../fonts/RobotoMono-Bold.eot');
+    src: url('../fonts/RobotoMono-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/RobotoMono-Bold.woff') format('woff'),
+    url('../fonts/RobotoMono-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto Slab Regular';
+    src: url('../fonts/RobotoSlab-Regular.eot');
+    src: url('../fonts/RobotoSlab-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/RobotoSlab-Regular.woff') format('woff'),
+    url('../fonts/RobotoSlab-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto Slab Bold';
+    src: url('../fonts/RobotoSlab-Bold.eot');
+    src: url('../fonts/RobotoSlab-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/RobotoSlab-Bold.woff') format('woff'),
+    url('../fonts/RobotoSlab-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

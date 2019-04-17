@@ -5,5 +5,5 @@ spl_autoload_register('autoloader');
 
 require_once('../src/bootstrap.php');
 
-$router = new Router();
+$router = new \router\Router($container);
 $router->run();

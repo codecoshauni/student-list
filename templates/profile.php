@@ -12,7 +12,7 @@
 <header>
     <div class="container">
         <h1>Fill out the form below to add your profile to the list</h1>
-        <a href="#">Show list</a>
+        <a href="/">Show list</a>
     </div>
 </header>
 <section>
@@ -20,7 +20,7 @@
         <div class="action-info">
             <p>Congratulations! Your profile has been successfully added to the list!</p>
         </div>
-        <form name="profile" method="post" action="#" autocomplete="off">
+        <form name="profile" method="post" action="/profile" autocomplete="off">
             <p>Name</p>
             <input class='field write' type="text" name="name" maxlength="20" placeholder="less than 21 letters" pattern="[A-Za-zА-Яа-яЁё]+$" autofocus required>
             <p>Surname</p>
@@ -34,7 +34,7 @@
             <input class='field write' type="text" name="group" placeholder="2 - 5 characters" pattern="[A-Za-zА-Яа-яЁё-0-9]{2,}" maxlength="5" required>
             <p class='error'>E-mail too short!</p>
             <p>Points</p>
-            <input class='field write' type="number" name="text" placeholder="between 7 and 400"  pattern="[0-9]{1,}" maxlength="3" required>
+            <input class='field write' type="number" name="points" placeholder="between 7 and 400"  pattern="[0-9]{1,}" maxlength="3" required>
             <p>Sex:</p>
             <input id='ml' class='field choose' type="radio" name="sex" value='male' required><label for='ml'>Male</label>
             <input id='fml' class='field choose' type="radio" name="sex" value='female'><label for='fml'>Female</label>

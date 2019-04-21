@@ -2,18 +2,18 @@
 
 namespace controller;
 
-use model\StudentsDataGateway;
-
 class ListOutputController
 {
+    private $container;
     private $studentsDataGateway;
 
-    public function __construct(StudentsDataGateway $studentsDataGateway)
+    public function __construct(\DIContainer $container)
     {
-        $this->studentsDataGateway = $studentsDataGateway;
+        $this->container = $container;
+        $this->studentsDataGateway = $this->container->get('studentsDataGateway');
     }
 
     public function run() {
-
+        require_once('../templates/students-list.php');
     }
 }

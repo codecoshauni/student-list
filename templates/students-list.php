@@ -20,7 +20,7 @@
                         <input class='button' type="submit" value="Find">
                     </form>
                 </div>
-                <a href="#">My profile</a>
+                <a href="/profile">My profile</a>
         </div>
     </header>
 

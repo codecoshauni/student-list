@@ -26,7 +26,7 @@ class Router
             die();
         }
 
-        $controller = new $controllerName($this->container->get('studentsDataGateway'));
+        $controller = new $controllerName($this->container);
         $controller->run();
     }
 

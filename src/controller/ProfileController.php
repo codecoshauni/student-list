@@ -2,18 +2,20 @@
 
 namespace controller;
 
-use model\StudentsDataGateway;
-
 class ProfileController
 {
+    private $container;
     private $studentsDataGateway;
+    private $validator;
 
-    public function __construct(StudentsDataGateway $studentsDataGateway)
+    public function __construct(\DIContainer $container)
     {
-        $this->studentsDataGateway = $studentsDataGateway;
+        $this->container = $container;
+        $this->studentsDataGateway = $this->container->get('studentsDataGateway');
+        $this->validator = $this->container->get('validator');
     }
 
     public function run() {
-
+        require_once('../templates/profile.php');
     }
 }

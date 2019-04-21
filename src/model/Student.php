@@ -4,10 +4,10 @@ namespace model;
 
 class Student
 {
-    private const GENDER_MALE = 'male';
-    private const GENDER_FEMALE = 'female';
-    private const HABITATION_LOCAL = 'local';
-    private const HABITATION_NONRESIDENT= 'nonresident';
+    const SEX_MALE = 'male';
+    const SEX_FEMALE = 'female';
+    const HABITATION_LOCAL = 'local';
+    const HABITATION_NONRESIDENT = 'nonresident';
 
     private $id;
     private $token;
@@ -20,8 +20,81 @@ class Student
     private $birth_year;
     private $habitation;
 
-    public function __construct()
-    {
+    public function __construct(string   $token,
+        string $name,
+        string $surname,
+        string $sex,
+        string $group_number,
+        string $email,
+        int $points,
+        int $birth_year,
+        string $habitation,
+        int $id = 0
+    ) {
+        $this->id = $id;
+        $this->token = $token;
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->sex = $sex;
+        $this->group_number = $group_number;
+        $this->email = $email;
+        $this->points = $points;
+        $this->birth_year = $birth_year;
+        $this->habitation = $habitation;
+    }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token)
+    {
+        $this->token = $token;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+
+    public function getSex()
+    {
+        return $this->sex;
+    }
+
+    public function getGroupNumber()
+    {
+        return $this->group_number;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function getPoints()
+    {
+        return $this->points;
+    }
+
+    public function getBirthYear()
+    {
+        return $this->birth_year;
+    }
+
+    public function getHabitation()
+    {
+        return $this->habitation;
     }
 }

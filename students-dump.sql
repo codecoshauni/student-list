@@ -1,6 +1,6 @@
 CREATE TABLE `students` (
   `id` int(11) NOT NULL,
-  `token` varchar(40) NOT NULL,
+  `token` varchar(64) NOT NULL,
   `name` varchar(20) NOT NULL,
   `surname` varchar(30) NOT NULL,
   `sex` enum('male','female') NOT NULL,

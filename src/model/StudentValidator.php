@@ -14,20 +14,24 @@ class StudentValidator
 
     public function verifyStudentData(Student $student)
     {
-        $this->errors[] = $this->verifyName($student->getName());
-        $this->errors[] = $this->verifyName($student->getSurname(), 30);
-        $this->errors[] = $this->verifyEmail($student->getEmail());
-        $this->errors[] = $this->verifyBirthYear($student->getBirthYear());
-        $this->errors[] = $this->verifyGroupNumber($student->getGroupNumber());
-        $this->errors[] = $this->verifyPoints($student->getPoints());
-        $this->errors[] = $this->verifySex($student->getSex());
-        $this->errors[] = $this->verifyHabitation($student->getHabitation());
-        return $this->errors;
+        $this->errors['name'] = $this->verifyName($student->getName());
+        $this->errors['surname'] = $this->verifyName($student->getSurname(), 30);
+        $this->errors['email'] = $this->verifyEmail($student->getEmail());
+        $this->errors['birth_year'] = $this->verifyBirthYear($student->getBirthYear());
+        $this->errors['group_number'] = $this->verifyGroupNumber($student->getGroupNumber());
+        $this->errors['points'] = $this->verifyPoints($student->getPoints());
+        $this->errors['sex'] = $this->verifySex($student->getSex());
+        $this->errors['habitation'] = $this->verifyHabitation($student->getHabitation());
+        $result = '';
+        foreach ($this->errors as $error) {
+            $result .= $error;
+        }
+        return ($result == '') ? [] : $this->errors;
     }
 
     private function verifyName(string $name, int $maxLength = 20)
     {
-        $error = ' ';
+        $error = '';
         if (mb_strlen($name) < 2) $error .= "Name can't be shorter than 2 characters. ";
         if (mb_strlen($name) > $maxLength) $error .= "Name can't be longer than {$maxLength} characters. ";
         if (!preg_match("/^[a-zA-Zа-яА-Я ,.'-]+$/ui", $name)) {
@@ -38,7 +42,7 @@ class StudentValidator
 
     private function verifyEmail(string $email, int $maxLength = 40)
     {
-        $error = ' ';
+        $error = '';
         if (mb_strlen($email) < 2) $error .= "Email can't be shorter than 3 characters. ";
         if (mb_strlen($email) > $maxLength) $error .= "Email can't be longer than {$maxLength} characters. ";
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -49,7 +53,7 @@ class StudentValidator
 
     private function verifyBirthYear(int $birthYear)
     {
-        $error = ' ';
+        $error = '';
         if ($birthYear > intval(date('Y') - 14)) $error .= "Age can't be less than 14 years. ";
         if ($birthYear < intval(date('Y') - 110)) $error .= "Age can't be more than 110. ";
         return $error;
@@ -57,7 +61,7 @@ class StudentValidator
 
     private function verifyGroupNumber(string $group_number)
     {
-        $error = ' ';
+        $error = '';
         if (mb_strlen($group_number) < 2) $error .= "Group number can't be shorter than 2 characters. ";
         if (mb_strlen($group_number) > 5) $error .= "Group number be longer than 5 characters. ";
         if (!preg_match("/^[a-zA-Zа-яА-Я0-9]+$/ui", $group_number)) {
@@ -68,7 +72,7 @@ class StudentValidator
 
     private function verifyPoints(int $points)
     {
-        $error = ' ';
+        $error = '';
         if ($points < 7) $error .= "Amount of points can't be less than 7. ";
         if ($points > 400) $error .= "Amount of points can't be more than 400. ";
         return $error;
@@ -80,7 +84,7 @@ class StudentValidator
             return "Sorry, but you gender ({$sex}) is non-existent";
         }
 
-        return ' ';
+        return '';
     }
 
     private function verifyHabitation(string $habitation)
@@ -89,6 +93,6 @@ class StudentValidator
             return "Sorry, but you ({$habitation}) is non-existent";
         }
 
-        return ' ';
+        return '';
     }
 }

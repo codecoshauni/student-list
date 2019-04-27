@@ -45,10 +45,10 @@ class StudentsDataGateway
         return $stmt->fetch();
     }
 
-    public function addStudent(Student $student)
+    public function addStudent(string $token, Student $student)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO `students` (
-            `token`, 
+        $stmt = $this->pdo->prepare("INSERT INTO `students` ( 
+            `token`,
             `name`, 
             `surname`, 
             `sex`, 
@@ -57,8 +57,8 @@ class StudentsDataGateway
             `points`, 
             `birth_year`, 
             `habitation`
-            ) VALUES (         
-            :token, 
+            ) VALUES ( 
+            :token,        
             :name, 
             :surname, 
             :sex, 
@@ -68,7 +68,7 @@ class StudentsDataGateway
             :birth_year, 
             :habitation
             )");
-        $stmt->bindValue(':token', $student->getToken());
+        $stmt->bindValue(':token', $token);
         $stmt->bindValue(':name', $student->getName());
         $stmt->bindValue(':surname', $student->getSurname());
         $stmt->bindValue(':sex', $student->getSex());
@@ -81,7 +81,7 @@ class StudentsDataGateway
         return;
     }
 
-    public function editStudent(Student $student)
+    public function editStudent(string $token, Student $student)
     {
         $stmt = $this->pdo->prepare("UPDATE `students` SET
             `name` = :name, 
@@ -93,7 +93,6 @@ class StudentsDataGateway
             `birth_year` = :birth_year,
             `habitation` = :habitation
             WHERE token = :token");
-        $stmt->bindValue(':token', $student->getToken());
         $stmt->bindValue(':name', $student->getName());
         $stmt->bindValue(':surname', $student->getSurname());
         $stmt->bindValue(':sex', $student->getSex());
@@ -102,6 +101,7 @@ class StudentsDataGateway
         $stmt->bindValue(':points', $student->getPoints(), \PDO::PARAM_INT);
         $stmt->bindValue(':birth_year', $student->getBirthYear(), \PDO::PARAM_INT);
         $stmt->bindValue(':habitation', $student->getHabitation());
+        $stmt->bindValue(':token', $token);
         $stmt->execute();
         return;
     }

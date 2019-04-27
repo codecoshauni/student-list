@@ -9,8 +9,6 @@ class Student
     const HABITATION_LOCAL = 'local';
     const HABITATION_NONRESIDENT = 'nonresident';
 
-    private $id;
-    private $token;
     private $name;
     private $surname;
     private $sex;
@@ -20,7 +18,7 @@ class Student
     private $birth_year;
     private $habitation;
 
-    public function __construct(string   $token,
+    public function __construct(
         string $name,
         string $surname,
         string $sex,
@@ -28,11 +26,8 @@ class Student
         string $email,
         int $points,
         int $birth_year,
-        string $habitation,
-        int $id = 0
+        string $habitation
     ) {
-        $this->id = $id;
-        $this->token = $token;
         $this->name = $name;
         $this->surname = $surname;
         $this->sex = $sex;
@@ -41,21 +36,6 @@ class Student
         $this->points = $points;
         $this->birth_year = $birth_year;
         $this->habitation = $habitation;
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function getToken()
-    {
-        return $this->token;
-    }
-
-    public function setToken(string $token)
-    {
-        $this->token = $token;
     }
 
     public function getName()
@@ -96,5 +76,10 @@ class Student
     public function getHabitation()
     {
         return $this->habitation;
+    }
+
+    public function getDataArray()
+    {
+
     }
 }

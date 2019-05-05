@@ -1,5 +1,7 @@
 <?php
 
+namespace Students;
+
 class DIContainer
 {
     private $registeredServices = [];
@@ -8,7 +10,7 @@ class DIContainer
     public function register(string $name, callable $factory)
     {
         if (array_key_exists($name, $this->registeredServices)) {
-            throw new DIContainerException('Service {$name} already exist');
+            throw new UserExceptions\DIContainerException("Service {$name} already exist");
         } else {
             $this->registeredServices[$name] = $factory;
         }
@@ -17,7 +19,7 @@ class DIContainer
     public function get(string $name)
     {
         if (!array_key_exists($name, $this->registeredServices)) {
-            throw new DIContainerException('Unregistered service {$name}');
+            throw new UserExceptions\DIContainerException("Unregistered service {$name}");
         }
 
         if (array_key_exists($name, $this->servicesObjects)) {

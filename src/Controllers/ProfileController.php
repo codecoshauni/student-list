@@ -1,6 +1,6 @@
 <?php
 
-namespace controller;
+namespace Students\Controllers;
 
 class ProfileController
 {
@@ -8,7 +8,7 @@ class ProfileController
     private $studentsDataGateway;
     private $validator;
 
-    public function __construct(\DIContainer $container)
+    public function __construct(\Students\DIContainer $container)
     {
         $this->container = $container;
         $this->studentsDataGateway = $this->container->get('studentsDataGateway');
@@ -23,7 +23,7 @@ class ProfileController
             $this->postRequestHandler();
         } else {
             header("HTTP/1.0 404 Not Found");
-            include_once('../../templates/404page.php');
+            include_once('../../templates/error.html');
             die();
         }
     }
@@ -97,15 +97,15 @@ class ProfileController
 
     private function createStudentFromPost()
     {
-        $name = strval($_POST['name']) ?? 0;
-        $surname = strval($_POST['surname']) ?? 0;
-        $sex = strval($_POST['sex']) ?? 0;
+        $name = strval($_POST['name']) ?? '';
+        $surname = strval($_POST['surname']) ?? '';
+        $sex = strval($_POST['sex']) ?? '';
         $group_number = strval($_POST['group_number']) ?? 0;
-        $email = strval($_POST['email']) ?? 0;
+        $email = strval($_POST['email']) ?? '';
         $points = intval($_POST['points']) ?? 0;
         $birth_year = intval($_POST['birth_year']) ?? 0;
-        $habitation = strval($_POST['habitation']) ?? 0;
-        $student = new \model\Student($name, $surname, $sex, $group_number, $email, $points,  $birth_year, $habitation);
+        $habitation = strval($_POST['habitation']) ?? '';
+        $student = new \Students\Model\Student($name, $surname, $sex, $group_number, $email, $points,  $birth_year, $habitation);
         return $student;
     }
 

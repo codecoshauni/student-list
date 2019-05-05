@@ -1,6 +1,6 @@
 <?php
 
-namespace model;
+namespace Students\Model;
 
 class StudentValidator
 {
@@ -22,11 +22,7 @@ class StudentValidator
         $this->errors['points'] = $this->verifyPoints($student->getPoints());
         $this->errors['sex'] = $this->verifySex($student->getSex());
         $this->errors['habitation'] = $this->verifyHabitation($student->getHabitation());
-        $result = '';
-        foreach ($this->errors as $error) {
-            $result .= $error;
-        }
-        return ($result == '') ? [] : $this->errors;
+        return (implode('', $this->errors) == '') ? [] : $this->errors;
     }
 
     private function verifyName(string $name, int $maxLength = 20)

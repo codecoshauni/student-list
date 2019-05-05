@@ -1,3 +1,5 @@
 <?php
 
-class FileExistException extends Exception {}
+namespace Students\UserExceptions;
+
+class FileExistException extends \Exception {}

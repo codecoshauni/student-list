@@ -1,8 +1,8 @@
 <?php
 
-namespace router;
+namespace Students\Routs;
 
-use DIContainer;
+use Students\DIContainer;
 
 class Router
 {
@@ -22,7 +22,7 @@ class Router
 
         if (!isset($controllerName)) {
             header("HTTP/1.0 404 Not Found");
-            include_once('../templates/404page.php');
+            include_once('../templates/error.html');
             die();
         }
 

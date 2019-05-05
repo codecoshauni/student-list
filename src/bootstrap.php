@@ -1,17 +1,19 @@
 <?php
 
-$container = new DIContainer();
+use Students\Model\{StudentValidator, StudentsDataGateway};
 
-$container->register('dbconfig', function (DIContainer $container) {
+$container = new Students\DIContainer();
+
+$container->register('dbconfig', function (Students\DIContainer $container) {
     $path = __DIR__ . '/' . 'dbconfig.ini';
     if (file_exists($path)) {
         return parse_ini_file(__DIR__ . '/' . 'dbconfig.ini');
     } else {
-        throw new FileExistException('{$path} does not exist');
+        throw new Students\UserExceptions\FileExistException("{$path} does not exist");
     }
 });
 
-$container->register('PDO', function (DIContainer $container) {
+$container->register('PDO', function (Students\DIContainer $container) {
     $config = $container->get('dbconfig');
 
     $host = $config['host'];
@@ -31,14 +33,14 @@ $container->register('PDO', function (DIContainer $container) {
     return $pdo;
 });
 
-$container->register('studentsDataGateway', function (DIContainer $container) {
+$container->register('studentsDataGateway', function (Students\DIContainer $container) {
     $pdo = $container->get('PDO');
-    $studentsDataGateway = new \model\StudentsDataGateway($pdo);
+    $studentsDataGateway = new StudentsDataGateway($pdo);
     return $studentsDataGateway;
 });
 
-$container->register('validator', function (DIContainer $container) {
+$container->register('validator', function (Students\DIContainer $container) {
     $studentsDataGateway = $container->get('studentsDataGateway');
-    $validator = new \model\StudentValidator($studentsDataGateway);
+    $validator = new StudentValidator($studentsDataGateway);
     return $validator;
 });

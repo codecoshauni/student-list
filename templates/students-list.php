@@ -15,8 +15,11 @@
                 <h1>Students list</h1>
             </div>
             <div class="search">
-                    <form name="search" method="get" action="#" autocomplete="off">
-                        <input class='field' type="search" name="search" placeholder="List search">
+                    <form name="search" method="get" action="/" autocomplete="off">
+                        <input type="hidden" name="by" value="<?= htmlspecialchars($linksService->getOrderBy()) ?>">
+                        <input type="hidden" name="in" value="<?= htmlspecialchars($linksService->getOrderDirection()) ?>">
+                        <input class='field' type="search" name="search" placeholder="List search"
+                               value="<?= htmlspecialchars($linksService->getSearch()) ?>">
                         <input class='button' type="submit" value="Find">
                     </form>
                 </div>
@@ -27,85 +30,41 @@
     <section>
         <div class="container">
             <div class="search-info">
-                    <p>Only students found for 'Birdney Tom' are shown:</p>
-                    <a href="#">Show all</a>
+                <?php if ($linksService->getSearch()):?>
+                    <p>Only students found for "<?= htmlspecialchars($linksService->getSearch()) ?>" are shown:</p>
+                    <a href="/">Show all</a>
+                <?php endif; ?>
             </div>
             <table>
                 <tr>
-                    <th><a class='asc' href="#">Name</a></th>
-                    <th><a class='desc' href="#">Surname</a></th>
-                    <th><a href="#">Group</a></th>
-                    <th><a href="#">Points</a></th>
+                    <th><a <?php if ($linksService->getOrderBy() == 'name') echo "class=\"{$linksService->getOrderDirection()}\"" ?>
+                                href="<?= htmlspecialchars($linksService->getSortingLink('name')) ?>">Name</a></th>
+                    <th><a <?php if ($linksService->getOrderBy() == 'surname') echo "class=\"{$linksService->getOrderDirection()}\"" ?>
+                                href="<?= htmlspecialchars($linksService->getSortingLink('surname')) ?>">Surname</a></th>
+                    <th><a <?php if ($linksService->getOrderBy() == 'group_number') echo "class=\"{$linksService->getOrderDirection()}\"" ?>
+                                href="<?= htmlspecialchars($linksService->getSortingLink('group_number')) ?>">Group</a></th>
+                    <th><a <?php if ($linksService->getOrderBy() == 'points') echo "class=\"{$linksService->getOrderDirection()}\"" ?>
+                                href="<?= htmlspecialchars($linksService->getSortingLink('points')) ?>">Points</a></th>
                 </tr>
-                <tr>
-                    <td>Futterkiste</td>
-                    <td>Anders</td>
-                    <td>32423</td>
-                    <td>23</td>
-                </tr>
-                <tr>
-                    <td>Moctezuma</td>
-                    <td>Chang</td>
-                    <td>23232</td>
-                    <td>42</td>
-                </tr>
-                <tr>
-                    <td>Ernst</td>
-                    <td>Mendel</td>
-                    <td>232342</td>
-                    <td>377</td>
-                </tr>
-                <tr>
-                    <td>Island Trading</td>
-                    <td>Helen Bennett</td>
-                    <td>23242</td>
-                    <td>233</td>
-                </tr>
-                <tr>
-                    <td>Winecellars</td>
-                    <td>Yoshi Tannamuri</td>
-                    <td>23232</td>
-                    <td>112</td>
-                </tr>
-                <tr>
-                    <td>Magazzini</td>
-                    <td>Giovanni Rovelli</td>
-                    <td>234223</td>
-                    <td>234</td>
-                </tr>
-                <tr>
-                    <td>Ernst</td>
-                    <td>Mendel</td>
-                    <td>232342</td>
-                    <td>377</td>
-                </tr>
-                <tr>
-                    <td>Island Trading</td>
-                    <td>Helen Bennett</td>
-                    <td>23242</td>
-                    <td>233</td>
-                </tr>
-                <tr>
-                    <td>Winecellars</td>
-                    <td>Yoshi Tannamuri</td>
-                    <td>23232</td>
-                    <td>112</td>
-                </tr>
-                <tr>
-                    <td>Magazzini</td>
-                    <td>Giovanni Rovelli</td>
-                    <td>234223</td>
-                    <td>234</td>
-                </tr>
+                <?php if ($studentData): ?>
+                    <?php foreach ($studentData as $student): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($student['name']) ?></td>
+                        <td><?= htmlspecialchars($student['surname']) ?></td>
+                        <td><?= htmlspecialchars($student['group_number']) ?></td>
+                        <td><?= htmlspecialchars($student['points']) ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
             </table>
             <div class="pagination">
-                    <p>Pages:</p>
-                    <a href="#">1</a>
-                    <a class='selected' href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a>
+                    <?php if ($linksService->getPagesCount()):?>
+                        <p>Pages:</p>
+                        <?php for ($i = 1; $i <= $linksService->getPagesCount(); ++$i):?>
+                            <a href="<?= htmlspecialchars($linksService->getPageLink($i)) ?>"><?= $i ?></a>
+                        <?php endfor; ?>
+                    <?php endif; ?>
             </div>
         </div>
     </section>

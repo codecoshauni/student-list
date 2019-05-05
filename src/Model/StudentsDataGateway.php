@@ -1,9 +1,11 @@
 <?php
 
-namespace model;
+namespace Students\Model;
 
 class StudentsDataGateway
 {
+    const LIMIT = 50;
+
     /**
      * @var \PDO
      */
@@ -14,9 +16,12 @@ class StudentsDataGateway
         $this->pdo = $pdo;
     }
 
-    public function getStudentsCount()
+    public function getStudentsCount($searchValue = '')
     {
-        $stmt = $this->pdo->prepare("SELECT count(*) FROM students");
+        $searchStatement = !(ltrim($searchValue) == '') ?
+            " WHERE concat(name, \" \", surname, \" \", group_number, \" \", points) LIKE \"%{$searchValue}%\""
+            : '';
+        $stmt = $this->pdo->prepare("SELECT count(*) FROM students" . $searchStatement);
         $stmt->execute();
         return $stmt->fetchcolumn();
     }
@@ -107,7 +112,7 @@ class StudentsDataGateway
     }
 
     public function getList(
-        int $limit = 50,
+        int $limit = self::LIMIT,
         int $offset = 0,
         string $orderBy = '',
         string $orderDirection = '',

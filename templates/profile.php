@@ -53,24 +53,24 @@
             <p class='error'><?php if (isset($errors['points'])) echo htmlspecialchars($errors['points']) ?></p>
             <p>Sex:</p>
             <input id='ml' class='field choose' type="radio" name="sex" value='male' required
-                    <?php if (isset($studentData['sex']) && $studentData['sex'] == \model\Student::SEX_MALE):?>
+                    <?php if (isset($studentData['sex']) && $studentData['sex'] == Students\Model\Student::SEX_MALE):?>
                         checked
                     <?php endif; ?>
                     ><label for='ml'>Male</label>
             <input id='fml' class='field choose' type="radio" name="sex" value='female'
-                    <?php if (isset($studentData['sex']) && $studentData['sex'] == \model\Student::SEX_FEMALE):?>
+                    <?php if (isset($studentData['sex']) && $studentData['sex'] == Students\Model\Student::SEX_FEMALE):?>
                         checked
                     <?php endif; ?>
                     ><label for='fml'>Female</label>
             <p class='error'><?php if (isset($errors['sex'])) echo htmlspecialchars($errors['sex']) ?></p>
             <p>Habitation:</p>
             <input id='lcl' class='field choose' type="radio" name="habitation" value='local' required
-                    <?php if (isset($studentData['habitation']) && $studentData['habitation'] == \model\Student::HABITATION_LOCAL):?>
+                    <?php if (isset($studentData['habitation']) && $studentData['habitation'] == Students\Model\Student::HABITATION_LOCAL):?>
                         checked
                     <?php endif; ?>
                     ><label for='lcl'>Local</label>
             <input id='nonr' class='field choose' type="radio" name="habitation" value='nonresident'
-                    <?php if (isset($studentData['habitation']) && $studentData['habitation'] == \model\Student::HABITATION_NONRESIDENT):?>
+                    <?php if (isset($studentData['habitation']) && $studentData['habitation'] == Students\Model\Student::HABITATION_NONRESIDENT):?>
                         checked
                     <?php endif; ?>
                     ><label for='nonr'>Nonresident</label>

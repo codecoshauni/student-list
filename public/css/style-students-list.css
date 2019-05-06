@@ -55,16 +55,15 @@ header .logo h1 {
 header .search {
     display: inline-block;
     float: right;
-    margin-top: 53px;
+    margin-top: 55px;
     margin-right: 25%;
     padding: 0;
-
 }
 
 header .field {
     border-radius: 3px;
     float: left;
-    height: 32px;
+    height: 35px;
     width: 270px;
     padding: 0;
     font-family: 'Roboto Slab Regular', sans-serif;
@@ -102,7 +101,7 @@ header a {
     text-align: center;
     position: absolute;
     right: 40px;
-    top: 27px;
+    top: 30px;
     height: 50px;
     width: 190px;
     padding: 10px 0 0 0;
@@ -172,6 +171,7 @@ section table {
     color: #3D434B;
     border-collapse: collapse;
     text-align: left;
+    margin-bottom: 10px;
   }
 
 section table td, th {
@@ -182,7 +182,7 @@ section table td, th {
 section table th {
     text-align: center;
     padding: 10px;
-    background-color: #ACC5CA;
+    background-color: #9cc5ca;
 }
 
 section table tr {
@@ -214,7 +214,7 @@ section table .desc::after {
 }
 
 section table th:hover {
-    background-color: rgb(137, 190, 201);
+    background-color: rgb(115, 185, 201);
     transition: background-color 0.3s linear;
 }
 
@@ -222,32 +222,296 @@ section .pagination {
     width: 100%;
     display: block;
     font-family: 'Roboto Mono Regular', sans-serif;
-    font-size: 24px;
+    font-size: 22px;
     color: #E1D8BA;
 }
 
 section .pagination p {
     display: inline-block;
+    margin-right: 15px;
 }
 
 section .pagination a {
     padding: 2px 5px;
+    margin-right: 5px;
     text-align: center;
     display: inline-block;
-    margin-left: 20px;
     text-decoration: none;
     font-family: 'Roboto Mono Regular', sans-serif;
-    font-size: 24px;
+    font-size: 20px;
     color: #E1D8BA;
 }
 
 section .pagination .selected {
-    background-color: #B56969;
-    border-radius: 50%;
-    padding: 2px 11px;
+    color: #B56969;
+    font-size: 22px;
 }
 
 section .pagination a:hover {
-    font-size: 28px;
+    font-size: 22px;
     transition: font-size 0.1s linear;
+}
+
+@media screen and (max-width: 1200px) {
+    section .container {
+        width: 65%;
+    }
+
+    header .logo {
+        margin-left: 15px;
+    }
+
+    header .logo h1 {
+        margin-top: 38px;
+        font-size: 25px;
+    }
+
+    header a {
+        right: 15px;
+    }
+
+    section .search-info p {
+        margin-top: 78px;
+        font-size: 15px;
+    }
+
+    section .search-info a {
+        margin-top: 65px;
+        padding: 3px 5px;
+        font-size: 18px;
+    }
+
+    section table {
+        font-size: 18px;
+    }
+
+    section table a {
+        font-size: 22px;
+    }
+
+    section .pagination {
+        font-size: 20px;
+    }
+
+    section .pagination a {
+        font-size: 18px;
+    }
+
+    section .pagination .selected {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    section .container {
+        width: 65%;
+    }
+
+    header .logo {
+        margin-top: 8px;
+        background: left url("../img/logo.png") no-repeat;
+        margin-left: 10px;
+    }
+
+    header .logo h1 {
+        margin-left: 0;
+        margin-top: 60px;
+        height: 22px;
+        font-size: 22px;
+    }
+
+    header .search {
+        margin-top: 60px;
+    }
+
+    header .field {
+        height: 30px;
+        width: 240px;
+        font-size: 16px;
+    }
+
+    header .search .button {
+        height: 31px;
+        width: 90px;
+        font-size: 20px;
+        margin-left: 8px;
+    }
+
+    header a {
+        right: 10px;
+        top: 43px;
+        height: 40px;
+        width: 130px;
+        font-size: 23px;
+    }
+
+    section .search-info {
+        margin: 0;
+        padding: 0;
+        display: block;
+        height: 80px;
+    }
+
+    section .search-info p {
+        margin-top: 30px;
+        display: block;
+    }
+
+    section .search-info a {
+        display: block;
+        float: left;
+        margin-top: 0;
+    }
+
+    section table {
+        font-size: 15px;
+        margin-top: 0;
+    }
+
+    section table a {
+        font-size: 20px;
+    }
+
+    section .pagination {
+        font-size: 18px;
+    }
+
+    section .pagination a {
+        font-size: 16px;
+    }
+
+    section .pagination .selected {
+        font-size: 18px;
+    }
+
+    section .pagination a:hover {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    section .container {
+        width: 80%;
+    }
+    header .logo h1 {
+        height: 16px;
+        font-size: 16px;
+    }
+
+    header .search {
+        margin-top: 63px;
+        margin-right: 10px;
+    }
+
+    header .field {
+        height: 25px;
+        width: 240px;
+        font-size: 14px;
+    }
+
+    header .search .button {
+        height: 26px;
+        width: 90px;
+        font-size: 15px;
+        margin-left: 8px;
+    }
+
+    header a {
+        right: 10px;
+        top: 8px;
+        height: 25px;
+        width: 90px;
+        font-size: 14px;
+    }
+
+    section .search-info {
+        height: 75px;
+    }
+
+    section .search-info p {
+        margin-top: 20px;
+        font-size: 13px;
+    }
+
+    section .search-info a {
+        padding: 3px 3px;
+        font-size: 15px;
+    }
+
+    section table {
+        font-size: 13px;
+    }
+
+    section table a {
+        font-size: 15px;
+    }
+
+    section .pagination {
+        font-size: 13px;
+    }
+
+    section .pagination p {
+        margin-right: 0;
+    }
+
+    section .pagination a {
+        font-size: 11px;
+        margin-right: 0;
+    }
+
+    section .pagination .selected {
+        font-size: 13px;
+    }
+
+    section .pagination a:hover {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    section .container {
+        width: 100%;
+    }
+
+    header .container {
+        height: 135px;
+    }
+
+    header .search {
+        left: 10px;
+        position: absolute;
+        margin-top: 100px;
+    }
+
+    header .field {
+        width: 180px;
+    }
+
+    section table {
+        font-size: 11px;
+    }
+
+    section table a {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+
+    header .field {
+        width: 130px;
+    }
+
+    header .search .button {
+        width: 50px;
+    }
+
+    section table {
+        font-size: 8px;
+        margin-top: 15px;
+    }
+
+    section table a {
+        font-size: 10px;
+    }
 }

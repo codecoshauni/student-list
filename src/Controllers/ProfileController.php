@@ -4,6 +4,11 @@ namespace Students\Controllers;
 
 class ProfileController
 {
+    const NOTICE_REG = 'Your profile has been successfully added to the list!';
+    const NOTICE_EDIT = 'Your profile data has been successfully changed!';
+    const HEADER_REG = 'Enter information about yourself to register';
+    const HEADER_EDIT = 'You can change your profile information';
+
     private $container;
     private $studentsDataGateway;
     private $validator;
@@ -23,7 +28,7 @@ class ProfileController
             $this->postRequestHandler();
         } else {
             header("HTTP/1.0 404 Not Found");
-            include_once('../../templates/error.html');
+            include_once('../../templates/error.php');
             die();
         }
     }
@@ -38,17 +43,15 @@ class ProfileController
     {
         if ($this->isUserRegistered()) {
             $studentData = $this->studentsDataGateway->getOneByToken($_COOKIE['token']);
-
             if (isset($_GET['notice'])) {
-                if ($_GET['notice'] == 'reg') $notice = 'Your profile has been successfully added to the list!';
-                if ($_GET['notice'] == 'edt') $notice = 'Your profile data has been successfully changed!';
+                if ($_GET['notice'] == 'reg') $notice = self::NOTICE_REG;
+                if ($_GET['notice'] == 'edt') $notice = self::NOTICE_EDIT;
             } else {
                 $notice = '';
             }
-
-            $this->render('You can change your profile information', $notice, $studentData);
+            $this->render(self::HEADER_EDIT, $notice, $studentData);
         } else {
-            $this->render('Enter information about yourself to register');
+            $this->render(self::HEADER_REG);
         }
     }
 
@@ -81,8 +84,8 @@ class ProfileController
             header("Location: {$redirectionUrl}");
             die();
         } else {
-            if ($this->isUserRegistered()) $headerCaption = 'You can change your profile information';
-            if ($this->isUserRegistered() == false) $headerCaption = 'Enter information about yourself to register';
+            if ($this->isUserRegistered()) $headerCaption = self::HEADER_EDIT;
+            if ($this->isUserRegistered() == false) $headerCaption = self::HEADER_REG;
             $studentData['name'] = $student->getName();
             $studentData['surname'] = $student->getSurname();
             $studentData['sex'] = $student->getSex();

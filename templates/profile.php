@@ -25,7 +25,7 @@
             <input class='field write' type="text" name="name" maxlength="20" placeholder="less than 21 letters"
                    pattern="[A-Za-zА-Яа-яЁё]+$" autofocus required
                    value="<?php if (isset($studentData['name'])) echo htmlspecialchars($studentData['name']) ?>">
-            <p class='error'><?php if (isset($errors['name'])) htmlspecialchars($errors['name']) ?></p>
+            <p class='error'><?php if (isset($errors['name'])) echo htmlspecialchars($errors['name']) ?></p>
             <p>Surname</p>
             <input class='field write' type="text" name="surname" placeholder="less than 31 letters"
                    pattern="[A-Za-zА-Яа-яЁё]+$" maxlength="30" required

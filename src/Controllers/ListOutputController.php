@@ -17,7 +17,7 @@ class ListOutputController
     {
         if ($_SERVER['REQUEST_METHOD'] != 'GET') {
             header("HTTP/1.0 404 Not Found");
-            include_once('../../templates/error.html');
+            include_once('../../templates/error.php');
             die();
         }
 
@@ -36,11 +36,11 @@ class ListOutputController
         );
 
         $rowsCount = $this->studentsDataGateway->getStudentsCount($search);
-        $linksService = new \Students\LinksService($search, $orderBy, $orderDirection, $rowsCount);
-        $this->render($studentData, $linksService);
+        $listOutputHelper = new \Students\ListOutputHelper($search, $orderBy, $orderDirection, $rowsCount, $page);
+        $this->render($studentData, $listOutputHelper);
     }
 
-    private function render(array $studentData, \Students\LinksService $linksService)
+    private function render(array $studentData, \Students\ListOutputHelper $listOutputHelper)
     {
         require_once('../templates/students-list.php');
     }

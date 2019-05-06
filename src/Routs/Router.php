@@ -22,7 +22,7 @@ class Router
 
         if (!isset($controllerName)) {
             header("HTTP/1.0 404 Not Found");
-            include_once('../templates/error.html');
+            include_once('../templates/error.php');
             die();
         }
 

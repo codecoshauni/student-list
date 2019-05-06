@@ -16,10 +16,12 @@
             </div>
             <div class="search">
                     <form name="search" method="get" action="/" autocomplete="off">
-                        <input type="hidden" name="by" value="<?= htmlspecialchars($linksService->getOrderBy()) ?>">
-                        <input type="hidden" name="in" value="<?= htmlspecialchars($linksService->getOrderDirection()) ?>">
-                        <input class='field' type="search" name="search" placeholder="List search"
-                               value="<?= htmlspecialchars($linksService->getSearch()) ?>">
+                        <?php if (htmlspecialchars($listOutputHelper->getOrderBy())): ?>
+                            <input type="hidden" name="by" value="<?= htmlspecialchars($listOutputHelper->getOrderBy()) ?>">
+                            <input type="hidden" name="in" value="<?= htmlspecialchars($listOutputHelper->getOrderDirection()) ?>">
+                        <?php endif; ?>
+                        <input class='field' type="search" name="search" placeholder="List search" required
+                               value="<?= htmlspecialchars($listOutputHelper->getSearch()) ?>">
                         <input class='button' type="submit" value="Find">
                     </form>
                 </div>
@@ -30,39 +32,40 @@
     <section>
         <div class="container">
             <div class="search-info">
-                <?php if ($linksService->getSearch()):?>
-                    <p>Only students found for "<?= htmlspecialchars($linksService->getSearch()) ?>" are shown:</p>
+                <?php if ($listOutputHelper->getSearch()):?>
+                    <p>Only students found for "<?= htmlspecialchars($listOutputHelper->getSearch()) ?>" are shown:</p>
                     <a href="/">Show all</a>
                 <?php endif; ?>
             </div>
             <table>
                 <tr>
-                    <th><a <?php if ($linksService->getOrderBy() == 'name') echo "class=\"{$linksService->getOrderDirection()}\"" ?>
-                                href="<?= htmlspecialchars($linksService->getSortingLink('name')) ?>">Name</a></th>
-                    <th><a <?php if ($linksService->getOrderBy() == 'surname') echo "class=\"{$linksService->getOrderDirection()}\"" ?>
-                                href="<?= htmlspecialchars($linksService->getSortingLink('surname')) ?>">Surname</a></th>
-                    <th><a <?php if ($linksService->getOrderBy() == 'group_number') echo "class=\"{$linksService->getOrderDirection()}\"" ?>
-                                href="<?= htmlspecialchars($linksService->getSortingLink('group_number')) ?>">Group</a></th>
-                    <th><a <?php if ($linksService->getOrderBy() == 'points') echo "class=\"{$linksService->getOrderDirection()}\"" ?>
-                                href="<?= htmlspecialchars($linksService->getSortingLink('points')) ?>">Points</a></th>
+                    <th><a <?php if ($listOutputHelper->getOrderBy() == 'name') echo "class=\"{$listOutputHelper->getOrderDirection()}\"" ?>
+                                href="<?= htmlspecialchars($listOutputHelper->getSortingLink('name')) ?>">Name</a></th>
+                    <th><a <?php if ($listOutputHelper->getOrderBy() == 'surname') echo "class=\"{$listOutputHelper->getOrderDirection()}\"" ?>
+                                href="<?= htmlspecialchars($listOutputHelper->getSortingLink('surname')) ?>">Surname</a></th>
+                    <th><a <?php if ($listOutputHelper->getOrderBy() == 'group_number') echo "class=\"{$listOutputHelper->getOrderDirection()}\"" ?>
+                                href="<?= htmlspecialchars($listOutputHelper->getSortingLink('group_number')) ?>">Group</a></th>
+                    <th><a <?php if ($listOutputHelper->getOrderBy() == 'points') echo "class=\"{$listOutputHelper->getOrderDirection()}\"" ?>
+                                href="<?= htmlspecialchars($listOutputHelper->getSortingLink('points')) ?>">Points</a></th>
                 </tr>
                 <?php if ($studentData): ?>
                     <?php foreach ($studentData as $student): ?>
                     <tr>
-                        <td><?= htmlspecialchars($student['name']) ?></td>
-                        <td><?= htmlspecialchars($student['surname']) ?></td>
-                        <td><?= htmlspecialchars($student['group_number']) ?></td>
-                        <td><?= htmlspecialchars($student['points']) ?></td>
+                        <td><?= $listOutputHelper->markSearchValue($student['name'])  ?></td>
+                        <td><?= $listOutputHelper->markSearchValue($student['surname']) ?></td>
+                        <td><?= $listOutputHelper->markSearchValue($student['group_number']) ?></td>
+                        <td><?= $listOutputHelper->markSearchValue($student['points']) ?></td>
                     </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>
 
             </table>
             <div class="pagination">
-                    <?php if ($linksService->getPagesCount()):?>
+                    <?php if ($listOutputHelper->getPagesCount() > 1):?>
                         <p>Pages:</p>
-                        <?php for ($i = 1; $i <= $linksService->getPagesCount(); ++$i):?>
-                            <a href="<?= htmlspecialchars($linksService->getPageLink($i)) ?>"><?= $i ?></a>
+                        <?php for ($i = 1; $i <= $listOutputHelper->getPagesCount(); ++$i):?>
+                            <a <?php if ($listOutputHelper->getPage() == $i) echo 'class="selected"' ?>
+                                    href="<?= htmlspecialchars($listOutputHelper->getPageLink($i)) ?>"><?= $i ?></a>
                         <?php endfor; ?>
                     <?php endif; ?>
             </div>

@@ -2,23 +2,26 @@
 
 namespace Students\Controllers;
 
+use Students\Error404Output;
+use Students\Model\StudentsDataGateway;
+
 class ListOutputController
 {
+    use Error404Output;
+
     private $container;
     private $studentsDataGateway;
 
     public function __construct(\Students\DIContainer $container)
     {
         $this->container = $container;
-        $this->studentsDataGateway = $this->container->get('studentsDataGateway');
+        $this->studentsDataGateway = $this->container->get(StudentsDataGateway::class);
     }
 
     public function run()
     {
         if ($_SERVER['REQUEST_METHOD'] != 'GET') {
-            header("HTTP/1.0 404 Not Found");
-            include_once('../../templates/error.php');
-            die();
+            $this->printError();
         }
 
         $search = strval($_GET['search'] ?? null);

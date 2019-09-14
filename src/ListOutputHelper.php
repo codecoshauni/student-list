@@ -51,9 +51,9 @@ class ListOutputHelper
 
     public function markSearchValue($tablevalue)
     {
-        if (!$this->search) return $tablevalue;
+        if (!$this->search) return htmlspecialchars($tablevalue);
 
-        $searchValues = explode(' ', $this->search);
+        $searchValues = preg_split( "/ +/", $this->search);
         foreach ($searchValues as $searchValue) {
             $start = mb_stripos($tablevalue, $searchValue);
             if ($start !== false) {

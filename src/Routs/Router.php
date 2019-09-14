@@ -2,10 +2,12 @@
 
 namespace Students\Routs;
 
-use Students\DIContainer;
+use Students\{DIContainer, Error404Output};
 
 class Router
 {
+    use Error404Output;
+
     private $routes;
     private $container;
 
@@ -21,9 +23,7 @@ class Router
         $controllerName = $this->getControllerName($path);
 
         if (!isset($controllerName)) {
-            header("HTTP/1.0 404 Not Found");
-            include_once('../templates/error.php');
-            die();
+            $this->printError();
         }
 
         $controller = new $controllerName($this->container);
@@ -33,7 +33,7 @@ class Router
     private function getUrlPath()
     {
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        return '/' . ltrim(str_replace('index.php', '', $path), '/');
+        return '/' . ltrim(preg_replace('/^\\/index\\.php/', '', $path), '/');
     }
 
     private function getControllerName(string $path)

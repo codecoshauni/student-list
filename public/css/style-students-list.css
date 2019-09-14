@@ -44,6 +44,13 @@ header .logo {
 }
 
 header .logo h1 {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
     margin-left: 64px;
     margin-top: 33px;
     height: 30px;
@@ -96,7 +103,14 @@ header .search .button:active {
     transition: box-shadow 0.1s linear;
 }
 
-header a {
+header .myprofile {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
     display: inline-block;
     text-align: center;
     position: absolute;
@@ -114,12 +128,12 @@ header a {
     font-size: 26px;
 }
 
-header a:hover {
+header .myprofile:hover {
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.49);
     transition: box-shadow 0.2s linear;
 }
 
-header a:active {
+header .myprofile:active {
     box-shadow: 3px 3px 10px #E3F5FB;
     transition: box-shadow 0.1s linear;
 }
@@ -248,8 +262,8 @@ section .pagination .selected {
 }
 
 section .pagination a:hover {
-    font-size: 22px;
-    transition: font-size 0.1s linear;
+    color: #80c984;
+    transition: color 0.1s linear;
 }
 
 @media screen and (max-width: 1200px) {
@@ -266,7 +280,7 @@ section .pagination a:hover {
         font-size: 25px;
     }
 
-    header a {
+    header .myprofile {
         right: 15px;
     }
 
@@ -337,7 +351,7 @@ section .pagination a:hover {
         margin-left: 8px;
     }
 
-    header a {
+    header .myprofile {
         right: 10px;
         top: 43px;
         height: 40px;
@@ -383,10 +397,6 @@ section .pagination a:hover {
     section .pagination .selected {
         font-size: 18px;
     }
-
-    section .pagination a:hover {
-        font-size: 18px;
-    }
 }
 
 @media screen and (max-width: 768px) {
@@ -416,7 +426,7 @@ section .pagination a:hover {
         margin-left: 8px;
     }
 
-    header a {
+    header .myprofile {
         right: 10px;
         top: 8px;
         height: 25px;
@@ -461,10 +471,6 @@ section .pagination a:hover {
 
     section .pagination .selected {
         font-size: 13px;
-    }
-
-    section .pagination a:hover {
-        font-size: 12px;
     }
 }
 

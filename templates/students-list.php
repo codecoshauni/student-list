@@ -11,9 +11,11 @@
 <body>
     <header>
         <div class="container">
+            <a href="/">
             <div class="logo">
                 <h1>Students list</h1>
             </div>
+            </a>
             <div class="search">
                     <form name="search" method="get" action="/" autocomplete="off">
                         <?php if (htmlspecialchars($listOutputHelper->getOrderBy())): ?>
@@ -25,7 +27,7 @@
                         <input class='button' type="submit" value="Find">
                     </form>
                 </div>
-                <a href="/profile">My profile</a>
+                <a class="myprofile" href="/profile">My profile</a>
         </div>
     </header>
 
@@ -33,7 +35,7 @@
         <div class="container">
             <div class="search-info">
                 <?php if ($listOutputHelper->getSearch()):?>
-                    <p>Only students found for "<?= htmlspecialchars($listOutputHelper->getSearch()) ?>" are shown:</p>
+                    <p>"<?= htmlspecialchars($listOutputHelper->getSearch()) ?>" are shown:</p>
                     <a href="/">Show all</a>
                 <?php endif; ?>
             </div>

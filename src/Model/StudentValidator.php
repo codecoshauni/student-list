@@ -12,17 +12,20 @@ class StudentValidator
         $this->studentsDataGateway = $studentsDataGateway;
     }
 
-    public function verifyStudentData(Student $student)
+    public function verifyStudentData(array $student)
     {
-        $this->errors['name'] = $this->verifyName($student->getName());
-        $this->errors['surname'] = $this->verifyName($student->getSurname(), 30);
-        $this->errors['email'] = $this->verifyEmail($student->getEmail());
-        $this->errors['birth_year'] = $this->verifyBirthYear($student->getBirthYear());
-        $this->errors['group_number'] = $this->verifyGroupNumber($student->getGroupNumber());
-        $this->errors['points'] = $this->verifyPoints($student->getPoints());
-        $this->errors['sex'] = $this->verifySex($student->getSex());
-        $this->errors['habitation'] = $this->verifyHabitation($student->getHabitation());
-        return (implode('', $this->errors) == '') ? [] : $this->errors;
+        $this->errors['name'] = $this->verifyName($student['name']);
+        $this->errors['surname'] = $this->verifyName($student['surname'], 30);
+        if (!isset($student['token'])) $student['token'] = '';
+        $this->errors['email'] = $this->verifyEmail($student['email'], $student['token']);
+        $this->errors['birth_year'] = $this->verifyBirthYear($student['birth_year']);
+        $this->errors['group_number'] = $this->verifyGroupNumber($student['group_number']);
+        $this->errors['points'] = $this->verifyPoints($student['points']);
+        $this->errors['sex'] = $this->verifySex($student['sex']);
+        $this->errors['habitation'] = $this->verifyHabitation($student['habitation']);
+        return array_filter($this->errors, function($v) {
+            if(!empty($v)) return $v;
+        });
     }
 
     private function verifyName(string $name, int $maxLength = 20)
@@ -30,15 +33,16 @@ class StudentValidator
         $error = '';
         if (mb_strlen($name) < 2) $error .= "Name can't be shorter than 2 characters. ";
         if (mb_strlen($name) > $maxLength) $error .= "Name can't be longer than {$maxLength} characters. ";
-        if (!preg_match("/^[a-zA-Zа-яА-Я ,.'-]+$/ui", $name)) {
+        if (!preg_match("/^[a-zA-Zа-яА-ЯЁё ,.'-]+$/ui", $name)) {
             $error .= 'Invalid character(s), only letters(EN and RU) and (,.\'-) are allowed.';
         }
         return $error;
     }
 
-    private function verifyEmail(string $email, int $maxLength = 40)
+    private function verifyEmail(string $email, string $token = '', int $maxLength = 40)
     {
         $error = '';
+        if ($this->studentsDataGateway->isEmailExist($email, $token)) $error .= "This email($email) already exists. ";
         if (mb_strlen($email) < 2) $error .= "Email can't be shorter than 3 characters. ";
         if (mb_strlen($email) > $maxLength) $error .= "Email can't be longer than {$maxLength} characters. ";
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -77,7 +81,7 @@ class StudentValidator
     private function verifySex(string $sex)
     {
         if (($sex !== Student::SEX_FEMALE) && ($sex !== Student::SEX_MALE)) {
-            return "Sorry, but you gender ({$sex}) is non-existent";
+            return "Specify your gender";
         }
 
         return '';
@@ -86,7 +90,7 @@ class StudentValidator
     private function verifyHabitation(string $habitation)
     {
         if (($habitation !== Student::HABITATION_LOCAL) && ($habitation !== Student::HABITATION_NONRESIDENT)) {
-            return "Sorry, but you ({$habitation}) is non-existent";
+            return "Specify your habitation";
         }
 
         return '';

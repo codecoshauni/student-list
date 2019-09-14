@@ -18,24 +18,15 @@ class Student
     private $birth_year;
     private $habitation;
 
-    public function __construct(
-        string $name,
-        string $surname,
-        string $sex,
-        string $group_number,
-        string $email,
-        int $points,
-        int $birth_year,
-        string $habitation
-    ) {
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->sex = $sex;
-        $this->group_number = $group_number;
-        $this->email = $email;
-        $this->points = $points;
-        $this->birth_year = $birth_year;
-        $this->habitation = $habitation;
+    public function __construct(array $studentData) {
+        $this->name = $studentData['name'];
+        $this->surname = $studentData['surname'];
+        $this->sex = $studentData['sex'];
+        $this->group_number = $studentData['group_number'];
+        $this->email = $studentData['email'];
+        $this->points = $studentData['points'];
+        $this->birth_year = $studentData['birth_year'];
+        $this->habitation = $studentData['habitation'];
     }
 
     public function getName()
@@ -78,8 +69,44 @@ class Student
         return $this->habitation;
     }
 
-    public function getDataArray()
+    public function setName(string $name)
     {
-
+        $this->name = $name;
     }
+
+    public function setSurname(string $surname)
+    {
+        $this->surname = $surname;
+    }
+
+    public function setSex(string $sex)
+    {
+        $this->sex = $sex;
+    }
+
+    public function setGroupNumber(string $group_number)
+    {
+        $this->group_number = $group_number;
+    }
+
+    public function setEmail(string $email)
+    {
+        $this->email = $email;
+    }
+
+    public function setPoints(int $points)
+    {
+        $this->points = $points;
+    }
+
+    public function setBirthYear(int $birth_year)
+    {
+        $this->birth_year = $birth_year;
+    }
+
+    public function setHabitation(string $habitation)
+    {
+        $this->habitation = $habitation;
+    }
+
 }

@@ -14,7 +14,7 @@
     src: url('../fonts/RobotoMono-Bold.eot?#iefix') format('embedded-opentype'),
     url('../fonts/RobotoMono-Bold.woff') format('woff'),
     url('../fonts/RobotoMono-Bold.ttf') format('truetype');
-    font-weight: normal;
+    font-weight: bold;
     font-style: normal;
 }
 
@@ -34,6 +34,6 @@
     src: url('../fonts/RobotoSlab-Bold.eot?#iefix') format('embedded-opentype'),
     url('../fonts/RobotoSlab-Bold.woff') format('woff'),
     url('../fonts/RobotoSlab-Bold.ttf') format('truetype');
-    font-weight: normal;
+    font-weight: bold;
     font-style: normal;
 }

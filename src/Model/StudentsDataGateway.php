@@ -2,26 +2,33 @@
 
 namespace Students\Model;
 
+use Students\Error404Output;
+
 class StudentsDataGateway
 {
+    use Error404Output;
     const LIMIT = 50;
 
+    const ALLOWED_BY = ['name', 'surname', 'group_number', 'points'];
+    const ALLOWED_IN = ['asc', 'desc'];
     /**
      * @var \PDO
      */
     private $pdo;
 
-    public function __construct($pdo)
+    public function __construct(\PDO $pdo)
     {
         $this->pdo = $pdo;
     }
 
     public function getStudentsCount($searchValue = '')
     {
-        $searchStatement = !(ltrim($searchValue) == '') ?
-            " WHERE concat(name, \" \", surname, \" \", group_number, \" \", points) LIKE \"%{$searchValue}%\""
-            : '';
-        $stmt = $this->pdo->prepare("SELECT count(*) FROM students" . $searchStatement);
+        if (empty($searchValue)) {
+            $stmt = $this->pdo->prepare("SELECT count(*) FROM students");
+        } else {
+            $stmt = $this->pdo->prepare("SELECT count(*) FROM students WHERE concat(name, \" \",surname, \" \",group_number, \" \",points) LIKE :searchValue");
+            $stmt->bindValue(':searchValue', "%$searchValue%");
+        }
         $stmt->execute();
         return $stmt->fetchcolumn();
     }
@@ -34,10 +41,11 @@ class StudentsDataGateway
         return (bool)$stmt->fetchcolumn();
     }
 
-    public function isEmailExist(string $email)
+    public function isEmailExist(string $email, string $token = '')
     {
-        $stmt = $this->pdo->prepare("SELECT count(email) FROM `students` WHERE `email` = :email");
+        $stmt = $this->pdo->prepare("SELECT count(email) FROM `students` WHERE `email` = :email AND `token` <> :token");
         $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':token', $token);
         $stmt->execute();
         return (bool)$stmt->fetchcolumn();
     }
@@ -97,7 +105,7 @@ class StudentsDataGateway
             `points` = :points,  
             `birth_year` = :birth_year,
             `habitation` = :habitation
-            WHERE token = :token");
+            WHERE `token` = :token");
         $stmt->bindValue(':name', $student->getName());
         $stmt->bindValue(':surname', $student->getSurname());
         $stmt->bindValue(':sex', $student->getSex());
@@ -118,7 +126,13 @@ class StudentsDataGateway
         string $orderDirection = '',
         string $searchValue = ''
     ) {
-        $orderStatement = !(ltrim($orderBy) == '') ? " ORDER BY " . "$orderBy" . " " . "$orderDirection" : '';
+        if (!in_array($orderBy, StudentsDataGateway::ALLOWED_BY) &&  !empty($orderBy)) {
+            $orderBy = StudentsDataGateway::ALLOWED_BY[0];
+        }
+        if (!in_array($orderDirection, StudentsDataGateway::ALLOWED_IN) && !empty($orderDirection)) {
+            $orderDirection = StudentsDataGateway::ALLOWED_IN[0];
+        }
+        $orderStatement = !(ltrim($orderBy) == '') ? " ORDER BY " . $orderBy . " " . $orderDirection : '';
         $searchStatement = !(ltrim($searchValue) == '') ?
             " WHERE concat(name, \" \", surname, \" \", group_number, \" \", points) LIKE \"%{$searchValue}%\""
             : '';

@@ -36,6 +36,13 @@ section .container {
 }
 
 header h1 {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
     float: left;
     display: inline-block;
     margin-top: 50px;
@@ -45,7 +52,14 @@ header h1 {
     color: #3D434B;
 }
 
-header a {
+header .showlist {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
     display: inline-block;
     text-align: center;
     float: right;
@@ -60,12 +74,12 @@ header a {
     font-size: 26px;
 }
 
-header a:hover {
+header .showlist:hover {
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.49);
     transition: box-shadow 0.2s linear;
 }
 
-header a:active {
+header .showlist:active {
     box-shadow: 3px 3px 10px #E3F5FB;
     transition: box-shadow 0.1s linear;
 }
@@ -129,6 +143,7 @@ section form label {
 }
 
 section form .button {
+    cursor: pointer;
     margin-top: 30px;
     margin-bottom: 20px;
     display: block;
@@ -158,7 +173,7 @@ section form .button:active {
         margin-top: 54px;
     }
 
-    header a {
+    header .showlist {
         padding: 10px 28px;
         margin-top: 37px;
         font-size: 22px;
@@ -183,7 +198,7 @@ section form .button:active {
         margin-top: 43px;
     }
 
-    header a {
+    header .showlist {
         padding: 8px 23px;
         margin-top: 30px;
         font-size: 18px;
@@ -241,7 +256,7 @@ section form .button:active {
         margin-top: 25px;
     }
 
-    header a {
+    header .showlist {
         padding: 5px 20px;
         margin-top: 20px;
         font-size: 16px;
@@ -275,7 +290,7 @@ section form .button:active {
         margin-top: 55px;
     }
 
-    header a {
+    header .showlist {
         position: absolute;
         left: 10px;
         padding: 5px 13px;

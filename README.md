@@ -1,5 +1,6 @@
+See [my app](https://student-list-app.herokuapp.com/) on Heroku.
 # Students list
-Simple CRUD PHP application with authorization by cookie-token. MVC architectural pattern was used. 
+Simple CRUD PHP application with authorization by cookie-token and displaying a list of students with sorting, searching and pagination. MVC architecture, dependency injection, table data gateway and routing were used.
 
 ### Requirements
 * [PHP] >= 7.0

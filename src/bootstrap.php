@@ -20,9 +20,8 @@ $container->register('PDO', function (Students\DIContainer $container) {
     $db = $config['database'];
     $user = $config['user'];
     $pass = $config['password'];
-    $charset = $config['charset'];
 
-    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+    $dsn = "mysql:host=$host;dbname=$db";
     $opt = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -33,14 +32,14 @@ $container->register('PDO', function (Students\DIContainer $container) {
     return $pdo;
 });
 
-$container->register('studentsDataGateway', function (Students\DIContainer $container) {
+$container->register(StudentsDataGateway::class, function (Students\DIContainer $container) {
     $pdo = $container->get('PDO');
     $studentsDataGateway = new StudentsDataGateway($pdo);
     return $studentsDataGateway;
 });
 
 $container->register('validator', function (Students\DIContainer $container) {
-    $studentsDataGateway = $container->get('studentsDataGateway');
+    $studentsDataGateway = $container->get(StudentsDataGateway::class);
     $validator = new StudentValidator($studentsDataGateway);
     return $validator;
 });

@@ -1,4 +1,4 @@
-See [my app](https://student-list-app.herokuapp.com/) on Heroku.
+See [my app](http://b29825zy.beget.tech/) on hosting.
 # Students list
 Simple CRUD PHP application with authorization by cookie-token and displaying a list of students with sorting, searching and pagination. MVC architecture, dependency injection, table data gateway and routing were used.
 
